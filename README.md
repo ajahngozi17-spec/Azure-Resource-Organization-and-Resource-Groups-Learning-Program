@@ -6,7 +6,7 @@ This engineering report presents a detailed governance framework, resource organ
 
 ---
 
-## 🔗 Verified Public Estimate Links
+##  Verified Public Estimate Links
 * **Azure Portal Resource Manager Workspace:** [View Verified Infrastructure Deployment](https://github.com/)
 * **Project Git Repository Link:** [View Verified Project Automation](https://github.com/)
 
