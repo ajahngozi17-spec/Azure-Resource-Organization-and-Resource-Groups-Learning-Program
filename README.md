@@ -215,10 +215,119 @@ resource "azurerm_resource_group" "dev" {
   name     = "rg-ecom-dev-eastus-01"
   location = "eastus"
   tags     = merge(local.base_tags, { Environment = "Development" })
+
+
+
+# Azure Enterprise Governance & HR System Infrastructure Deployment
+
+## 1. Project Overview
+This repository contains the architecture blueprint, automation assets, and validation evidence for the corporate HR System lifecycle environment deployment. The implementation complies fully with corporate cloud governance standards, including uniform tag taxonomies, strict naming frameworks, and access controls built directly into Microsoft Azure.
+
+---
+
+## 2. Infrastructure Design & Naming Patterns
+Resources are organized into lifecycle-specific wrappers within the **(US) East US 2** (`eastus2`) deployment region. 
+
+### 2.1 Corporate Convention Formulas
+* **Resource Groups:** `ct-hr-[env]-rg-eus2`
+* **Virtual Networks:** `vnet-hr-[env]-eastus2`
+* **Virtual Machines:** `vmhr[env]eastus2[num]`
+* **Storage Accounts:** `cthr[env]storage2026`
+
+### 2.2 Environment Mapping Matrix
+| Resource Group Name | Core Deployed Infrastructure | Environment Target Purpose |
+| :--- | :--- | :--- |
+| **`ct-hr-dev-rg-eus2`** | `vnet-hr-dev-eastus2`<br>`vmhrdeveastus201` | Sandbox workspace for active development and prototyping. |
+| **`ct-hr-tst-rg-eus2`** | *Awaiting Pipeline Promotion* | Isolated space for QA validation and regression testing. |
+| **`ct-hr-stg-rg-eus2`** | *Awaiting Pipeline Promotion* | Pre-production environment for User Acceptance Testing (UAT). |
+| **`ct-hr-prod-rg-eus2`** | `cthrprodstorage2026` | Secure, production workspace for customer-facing services. |
+
+---
+
+## 3. Metadata Tagging Policy
+Every resource group and asset within this subscription must implement the following 4-tier metadata schema to ensure proper cost center allocation and reporting compliance:
+
+```yaml
+Tags:
+  Environment: [DEVELOPMENT | TESTING | STAGING | PRODUCTION]
+  Project:     "HR System"
+  Owner:       "DevOps-Core-Team"
+  CostCenter:  "FIN-9942"
 }
 
 resource "azurerm_resource_group" "prod" {
   name     = "rg-ecom-prod-eastus-01"
   location = "eastus"
+
+# Azure Enterprise Governance & HR System Infrastructure Deployment
+
+## 1. Project Overview
+This repository contains the architecture blueprint, automation assets, and validation evidence for the corporate HR System lifecycle environment deployment. The implementation complies fully with corporate cloud governance standards, including uniform tag taxonomies, strict naming frameworks, and access controls built directly into Microsoft Azure.
+
+---
+
+## 2. Infrastructure Design & Naming Patterns
+Resources are organized into lifecycle-specific wrappers within the **(US) East US 2** (`eastus2`) deployment region. 
+
+### 2.1 Corporate Convention Formulas
+* **Resource Groups:** `ct-hr-[env]-rg-eus2`
+* **Virtual Networks:** `vnet-hr-[env]-eastus2`
+* **Virtual Machines:** `vmhr[env]eastus2[num]`
+* **Storage Accounts:** `cthr[env]storage2026`
+
+### 2.2 Environment Mapping Matrix
+| Resource Group Name | Core Deployed Infrastructure | Environment Target Purpose |
+| :--- | :--- | :--- |
+| **`ct-hr-dev-rg-eus2`** | `vnet-hr-dev-eastus2`<br>`vmhrdeveastus201` | Sandbox workspace for active development and prototyping. |
+| **`ct-hr-tst-rg-eus2`** | *Awaiting Pipeline Promotion* | Isolated space for QA validation and regression testing. |
+| **`ct-hr-stg-rg-eus2`** | *Awaiting Pipeline Promotion* | Pre-production environment for User Acceptance Testing (UAT). |
+| **`ct-hr-prod-rg-eus2`** | `cthrprodstorage2026` | Secure, production workspace for customer-facing services. |
+
+---
+
+## 3. Metadata Tagging Policy
+Every resource group and asset within this subscription must implement the following 4-tier metadata schema to ensure proper cost center allocation and reporting compliance:
+
+```yaml
+Tags:
+  Environment: [DEVELOPMENT | TESTING | STAGING | PRODUCTION]
+  Project:     "HR System"
+  Owner:       "DevOps-Core-Team"
+  CostCenter:  "FIN-9942"
+
+# Setup Development Environment Workspace
+az group create --name "ct-hr-dev-rg-eus2" --location "eastus2" \
+  --tags "Environment=DEVELOPMENT" "Project=HR System" "Owner=DevOps-Core-Team" "CostCenter=FIN-9942"
+
+# Setup Testing Environment Workspace
+az group create --name "ct-hr-tst-rg-eus2" --location "eastus2" \
+  --tags "Environment=TESTING" "Project=HR System" "Owner=DevOps-Core-Team" "CostCenter=FIN-9942"
+
+# Setup Staging Environment Workspace
+az group create --name "ct-hr-stg-rg-eus2" --location "eastus2" \
+  --tags "Environment=STAGING" "Project=HR System" "Owner=DevOps-Core-Team" "CostCenter=FIN-9942"
+
+6. Deployment Evidence & Portal Verification
+6.1 Resource Group Directory Map
+Verification showing the successful automated provisioning and metadata tag attachment for each environment container:
+
+6.2 Active Deployed Core Assets
+Verification showing the successful provisioning, configuration, and structural matching of the underlying virtual machines, networks, and production storage arrays:
+
+
+## Part 3: Summary Submission Text
+
+> **Submission Summary Report**
+> 
+> * **Student Identifier / Subscription Principal:** `ajahngozi17@gmail.com`
+> * **Project Focus:** HR System Lifecycle Infrastructure Deployment
+> * **Target Location Baseline:** (US) East US 2 (`eastus2`)
+> * **Key Milestones Achieved:**
+>   1. Successfully established a clear, governance-compliant naming convention and tracking structure across all application tiers.
+>   2. Automated the creation of three separate lifecycle resource groups (`Development`, `Testing`, `Staging`) using an advanced Azure CLI script inside the Cloud Shell Bash terminal.
+>   3. Deployed and verified diverse assets, including an enterprise Virtual Network (`vnet-hr-dev-eastus2`), a Linux Virtual Machine (`vmhrdeveastus201`), and a highly durable Production Storage Account (`cthrprodstorage2026`).
+>   4. Enforced strict organizational policies by assigning metadata tags (`Environment`, `Project`, `Owner`, `CostCenter`) to ensure clear cost tracking.
+>   5. Defined a least-privilege security matrix using role-based access control (RBAC) mappings to protect production assets while giving development and testing teams the exact access they need.
+>   6. Validated resource lifecycle workflows by testing bulk cleanup procedures using the Azure CLI. All project assets and proof documentation have been successfully organized and committed to the GitHub repository.
   tags     = merge(local.base_tags, { Environment = "Production" })
 }
